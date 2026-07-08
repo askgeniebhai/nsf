@@ -1,0 +1,138 @@
+{
+    "businessName": "Neela Security Force",
+    "tagline": "We Face What You Fear",
+    "logo": "assets/images/logo.png",
+    "phone": "+91 83104 57215",
+    "location": "Bengaluru, Karnataka, India",
+    "email": "info@nfs.co.in",
+    "whatsapp": "918310457215",
+    "heroTitle": "Protecting People. <span>Securing Assets.</span> Building Trust.",
+    "heroSubtitle": "Neela Security Force delivers elite, technology-driven security solutions for enterprise, industrial, and executive environments. We provide the peace of mind you deserve through unwavering vigilance.",
+    "heroImage": "assets/images/banner.jpg",
+    "mission": "To provide world-class security services through a combination of highly trained personnel and cutting-edge technology, ensuring the safety and prosperity of our clients.",
+    "vision": "To be the most trusted and innovative security partner globally, recognized for our integrity, professional excellence, and commitment to human safety.",
+    "aboutTitle": "The Standard of Excellence in Private Security",
+    "aboutText": "Neela Security Force stands at the forefront of the security industry, offering a comprehensive suite of services designed to mitigate risk and ensure operational continuity. Founded on principles of military discipline and modern strategic thinking, we provide bespoke security architectures for a diverse clientele.",
+    "aboutImage": "assets/images/about.jpg",
+    "aboutSecondaryImages": [
+        "assets/images/ops.jpg",
+        "assets/images/night.jpg"
+    ],
+    "stats": [
+        { "label": "Years Experience", "value": "12+", "icon": "calendar" },
+        { "label": "Trained Guards", "value": "750+", "icon": "users" },
+        { "label": "Happy Clients", "value": "150+", "icon": "smile" },
+        { "label": "Response Time", "value": "<15 min", "icon": "clock" }
+    ],
+    "services": [
+        {
+            "title": "Executive Protection",
+            "description": "Discreet and highly professional close-protection services for high-net-worth individuals, executives, and VIPs.",
+            "image": "assets/images/chief.jpg",
+            "icon": "user-check"
+        },
+        {
+            "title": "Corporate Guarding",
+            "description": "Smart, well-groomed, and tech-enabled security personnel tailored for high-stakes corporate and IT environments.",
+            "image": "assets/images/corporate-security.jpg",
+            "icon": "building-2"
+        },
+        {
+            "title": "Industrial Security",
+            "description": "Robust security frameworks for manufacturing plants, warehouses, and critical infrastructure, focusing on loss prevention.",
+            "image": "assets/images/industrial-security.jpg",
+            "icon": "factory"
+        },
+        {
+            "title": "Electronic Surveillance",
+            "description": "Integrated CCTV monitoring, access control systems, and biometric solutions managed by our 24/7 command center.",
+            "image": "assets/images/monitor.jpg",
+            "icon": "video"
+        },
+        {
+            "title": "Event Security Management",
+            "description": "Strategic crowd control and safety management for large-scale public events, exhibitions, and corporate gatherings.",
+            "image": "assets/images/event-security.jpg",
+            "icon": "ticket"
+        },
+        {
+            "title": "Canine (K9) Squad",
+            "description": "Specialized K9 units for explosive detection, narcotics tracking, and high-security perimeter patrolling.",
+            "image": "assets/images/guard.jpg",
+            "icon": "dog"
+        }
+    ],
+    "industries": [
+        { "name": "Banking & Finance", "image": "assets/images/office.jpg", "icon": "banknote" },
+        { "name": "IT & Tech Parks", "image": "assets/images/campus.jpg", "icon": "laptop" },
+        { "name": "Manufacturing", "image": "assets/images/plant.jpg", "icon": "settings" },
+        { "name": "Retail & Malls", "image": "assets/images/mall.jpg", "icon": "shopping-bag" },
+        { "name": "Healthcare", "image": "assets/images/plaza.jpg", "icon": "heart-pulse" },
+        { "name": "Hospitality", "image": "assets/images/plaza.jpg", "icon": "hotel" },
+        { "name": "Logistics", "image": "assets/images/control.jpg", "icon": "truck" },
+        { "name": "Educational Institutions", "image": "assets/images/campus.jpg", "icon": "graduation-cap" }
+    ],
+    "whyChooseUs": [
+        {
+            "title": "Unmatched Discipline",
+            "description": "Our personnel are recruited and trained under rigorous standards derived from military and law enforcement protocols.",
+            "icon": "shield-check"
+        },
+        {
+            "title": "Real-Time Transparency",
+            "description": "Our proprietary 'Attendance by Guards' system provides clients with live tracking and performance analytics.",
+            "icon": "bar-chart-3"
+        },
+        {
+            "title": "PSARA Certified",
+            "description": "Fully compliant with all statutory regulations and licensed under the Private Security Agencies Regulation Act.",
+            "icon": "scroll-text"
+        },
+        {
+            "title": "Integrity First",
+            "description": "We build long-term partnerships based on radical transparency and unwavering ethical standards.",
+            "icon": "handshake"
+        }
+    ],
+    "attendance": {
+        "badge": "Attendance by Guards",
+        "title": "Digital • Transparent • Real-Time",
+        "description": "Our technology-driven attendance system ensures 100% transparency with real-time tracking, geo-tagging, live dashboards and reports.",
+        "features": [
+            { "text": "Real-time Tracking", "icon": "map-pin" },
+            { "text": "Geo-tagged Check-in/out", "icon": "navigation" },
+            { "text": "Live Dashboard", "icon": "layout-dashboard" },
+            { "text": "Reports & Analytics", "icon": "clipboard-list" },
+            { "text": "Alerts & Notifications", "icon": "bell" }
+        ],
+        "images": {
+            "main": "assets/images/monitor.jpg",
+            "secondary": "assets/images/guard.png"
+        }
+    },
+    "leadership": [
+        {
+            "name": "Retd. Col. R. Krishnan",
+            "role": "Head of Operations",
+            "image": "assets/images/chief.jpg"
+        },
+        {
+            "name": "Sarah D'Souza",
+            "role": "Director of Technology",
+            "image": "assets/images/officer.jpg"
+        },
+        {
+            "name": "Amit Shah",
+            "role": "Chief Security Strategist",
+            "image": "assets/images/guard.jpg"
+        }
+    ],
+    "clients": [
+        { "name": "Global Bank", "logo": "assets/images/logo.png" },
+        { "name": "Tech Corp", "logo": "assets/images/logo.png" },
+        { "name": "Pharma Ltd", "logo": "assets/images/logo.png" },
+        { "name": "City Mall", "logo": "assets/images/logo.png" },
+        { "name": "Elite Residencies", "logo": "assets/images/logo.png" },
+        { "name": "Mega Logistics", "logo": "assets/images/logo.png" }
+    ]
+}
