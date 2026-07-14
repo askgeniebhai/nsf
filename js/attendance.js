@@ -120,7 +120,6 @@ const AttendanceEngine = (() => {
                             lastUpdate: new Date().toISOString()
                         };
                         StorageService.save('nsf_live_location_' + user.id, livePos);
-                        console.log("Live position updated", livePos);
                     },
                     null,
                     { enableHighAccuracy: true }
