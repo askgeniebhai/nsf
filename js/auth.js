@@ -2,52 +2,31 @@
 
 const AuthService = (() => {
     const login = (role, username, password) => {
-        const errorEl = document.getElementById('error-message');
-        const btnEl = document.getElementById('btn-submit');
-
-        const showError = (msg) => {
-            if (errorEl) {
-                errorEl.textContent = msg;
-                errorEl.style.display = 'block';
-            } else {
-                alert(msg);
-            }
-            if (btnEl) {
-                btnEl.disabled = false;
-                btnEl.textContent = 'Sign In';
-            }
-        };
-
-        if (errorEl) errorEl.style.display = 'none';
-        if (btnEl) {
-            btnEl.disabled = true;
-            btnEl.textContent = 'Authenticating...';
+        if (!role || !username || !password) {
+            alert("All fields are required.");
+            return;
         }
 
-        // Simulate network delay for UX
-        setTimeout(() => {
-            if (!role || !username || !password) {
-                showError("All fields are required.");
-                return;
+        // Mock authentication validation
+        let valid = false;
+        if (role === 'admin' && username === 'admin' && password === 'admin') {
+            valid = true;
+        } else if (role === 'guard' && username === 'NFS-9921' && password === 'password') {
+            valid = true;
+        } else if (role === 'supervisor' || role === 'client') {
+            // For phase 1, assume other roles are valid if they provide anything
+            // but we can be stricter.
+            if (password === 'password' || password === 'admin') {
+               valid = true;
             }
+        }
 
-            // Mock authentication validation
-            let valid = false;
-            if (role === 'admin' && username === 'admin' && password === 'admin') {
-                valid = true;
-            } else if (role === 'guard' && username === 'NFS-9921' && password === 'password') {
-                valid = true;
-            } else if (role === 'supervisor' || role === 'client') {
-                if (password === 'password' || password === 'admin') {
-                   valid = true;
-                }
-            }
+        if (!valid) {
+            alert("Invalid credentials.");
+            return;
+        }
 
-            if (!valid) {
-                showError("Invalid credentials.");
-                return;
-            }
-
+        console.log(`Attempting login for role: ${role}, user: ${username}`);
 
         const user = {
             id: username,
@@ -122,7 +101,7 @@ const AuthService = (() => {
             return null;
         }
 
-        if (requiredRole && user.role !== requiredRole && user.role !== 'admin') {
+        if (requiredRole && user.role !== requiredRole) {
             window.location.href = '../login.html';
             return null;
         }
