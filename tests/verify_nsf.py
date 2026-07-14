@@ -16,7 +16,7 @@ async def test_nsf_flow():
 
         # 1. Test Homepage
         print("[Test] Loading NSF Homepage...")
-        await page.goto("http://localhost:3000/nsf/index.html")
+        await page.goto("http://localhost:3000/index.html")
         title = await page.title()
         print(f"[Test] Page Title: {title}")
         assert "Neela Security Force" in title
@@ -49,7 +49,7 @@ async def test_nsf_flow():
 
         # 5. Admin Flow
         print("[Test] Logging out and in as Admin...")
-        await page.goto("http://localhost:3000/nsf/login.html")
+        await page.goto("http://localhost:3000/login.html")
         await page.select_option("#role", "admin")
         await page.fill("#username", "admin")
         await page.fill("#password", "admin")

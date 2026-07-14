@@ -54,15 +54,35 @@ const AuthService = (() => {
             default:
                 window.location.href = 'index.html';
         }
+        }, 500); // 500ms mock delay
     };
 
     const logout = () => {
+        // Clear all authentication artifacts
         localStorage.removeItem('nsf_user');
+
+        // Remove tracking states or duty flags based on current user
+        const keysToRemove = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && (key.startsWith('nsf_active_duty_') || key.startsWith('nsf_live_location_'))) {
+                keysToRemove.push(key);
+            }
+        }
+        keysToRemove.forEach(k => localStorage.removeItem(k));
+
         window.location.href = '../login.html';
     };
 
     const getCurrentUser = () => {
-        return JSON.parse(localStorage.getItem('nsf_user'));
+        try {
+            const data = localStorage.getItem('nsf_user');
+            return data ? JSON.parse(data) : null;
+        } catch (e) {
+            console.error("Invalid session data");
+            localStorage.removeItem('nsf_user');
+            return null;
+        }
     };
 
     const checkAuth = (requiredRole) => {
