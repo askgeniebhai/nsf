@@ -2,7 +2,30 @@
 
 const AuthService = (() => {
     const login = (role, username, password) => {
-        // Mock authentication logic
+        if (!role || !username || !password) {
+            alert("All fields are required.");
+            return;
+        }
+
+        // Mock authentication validation
+        let valid = false;
+        if (role === 'admin' && username === 'admin' && password === 'admin') {
+            valid = true;
+        } else if (role === 'guard' && username === 'NFS-9921' && password === 'password') {
+            valid = true;
+        } else if (role === 'supervisor' || role === 'client') {
+            // For phase 1, assume other roles are valid if they provide anything
+            // but we can be stricter.
+            if (password === 'password' || password === 'admin') {
+               valid = true;
+            }
+        }
+
+        if (!valid) {
+            alert("Invalid credentials.");
+            return;
+        }
+
         console.log(`Attempting login for role: ${role}, user: ${username}`);
 
         const user = {
@@ -48,6 +71,16 @@ const AuthService = (() => {
             window.location.href = '../login.html';
             return null;
         }
+
+        // Check session timeout (24 hours)
+        const loggedInAt = new Date(user.loggedInAt);
+        const now = new Date();
+        const diffHours = (now - loggedInAt) / (1000 * 60 * 60);
+        if (diffHours > 24) {
+            logout();
+            return null;
+        }
+
         if (requiredRole && user.role !== requiredRole) {
             window.location.href = '../login.html';
             return null;
