@@ -101,6 +101,7 @@
 </div>
 
 <script src="../js/StorageService.js"></script>
+<script src="../js/seed.js"></script>
 <script src="../js/auth.js"></script>
 <script src="../js/ui-components.js"></script>
 <script>
@@ -116,16 +117,35 @@
         document.getElementById('stat-alerts').textContent = alerts.length;
 
         const body = document.getElementById('admin-log-body');
-        body.innerHTML = logs.slice(-10).reverse().map(l => `
+        const allEmployees = StorageService.load('nsf_employees', []);
+
+        body.innerHTML = logs.slice(-10).reverse().map(l => {
+            // Retrieve full name if missing in log
+            let empName = l.userName || l.name;
+            if (!empName) {
+                const emp = allEmployees.find(e => e.id === l.userId);
+                empName = emp ? emp.name : 'Unknown Guard';
+            }
+
+            // Retrieve lat/lng safely
+            let lat = l.lat;
+            let lng = l.lng;
+            let acc = l.accuracy || 0;
+            if (l.location && typeof l.location === 'object') {
+                lat = lat || l.location.lat;
+                lng = lng || l.location.lng;
+            }
+
+            return `
             <tr>
-                <td><strong>${l.userName}</strong><br><small style="color:#94a3b8">${l.userId}</small></td>
-                <td>${l.client}</td>
-                <td><span style="color: ${l.type === 'Check In' ? '#10b981' : '#ef4444'}">${l.type}</span></td>
-                <td>${new Date(l.timestamp).toLocaleTimeString()}</td>
-                <td><span title="Acc: ${Math.round(l.accuracy)}m" style="color: #0369a1; cursor: help;"><i data-lucide="map-pin" class="icon-sm"></i> ${l.lat.toFixed(4)}, ${l.lng.toFixed(4)}</span></td>
+                <td><strong>${empName}</strong><br><small style="color:#94a3b8">${l.userId || l.empId}</small></td>
+                <td>${l.client || l.location?.address || 'Main Gate'}</td>
+                <td><span style="color: ${l.type === 'Check In' ? '#10b981' : '#ef4444'}">${l.type || 'Check In'}</span></td>
+                <td>${l.timestamp ? new Date(l.timestamp).toLocaleTimeString() : (l.checkIn || '--')}</td>
+                <td><span title="Acc: ${Math.round(acc)}m" style="color: #0369a1; cursor: help;"><i data-lucide="map-pin" class="icon-sm"></i> ${lat ? lat.toFixed(4) : 'N/A'}, ${lng ? lng.toFixed(4) : 'N/A'}</span></td>
                 <td><button style="background:none; border:none; color:#4f46e5; font-size:12px; font-weight:600; cursor:pointer;">Verify</button></td>
             </tr>
-        `).join('') || '<tr><td colspan="6" style="text-align:center; padding:40px; opacity:0.5;">No activity recorded yet.</td></tr>';
+        `}).join('') || '<tr><td colspan="6" style="text-align:center; padding:40px; opacity:0.5;">No activity recorded yet.</td></tr>';
 
         lucide.createIcons();
     }
