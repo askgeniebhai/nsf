@@ -65,7 +65,8 @@
         </div>
     </div>
     <script src="../js/StorageService.js"></script>
-    <script src="../js/auth.js"></script>
+    <script src="../js/seed.js"></script>
+<script src="../js/auth.js"></script>
     <script src="../js/ui-components.js"></script>
     <script>
         AuthService.checkAuth('admin');
@@ -74,20 +75,34 @@
 
         function renderPayroll() {
             const logs = StorageService.load('nsf_attendance_logs', []);
-            const employees = [
-                { id: 'NFS-9921', name: 'John Smith', rank: 'Guard' },
-                { id: 'NFS-001', name: 'Rajesh Kumar', rank: 'Head Guard' }
+            const allEmployees = StorageService.load('nsf_employees', []);
+            const employees = allEmployees.length > 0 ? allEmployees : [
+                { id: 'NFS-9921', name: 'John Smith', rank: 'Guard', salary: 15000 },
+                { id: 'NFS-001', name: 'Rajesh Kumar', rank: 'Head Guard', salary: 18000 }
             ];
+
             const body = document.getElementById('payroll-body');
             body.innerHTML = employees.map(emp => {
                 const presentDays = logs.filter(l => l.userId === emp.id && l.type === 'Check In').length;
-                const gross = presentDays * 650;
-                const net = gross * 0.875;
+
+                // Working Days in Month
+                const today = new Date();
+                const workingDaysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+
+                const absents = workingDaysInMonth - presentDays;
+
+                // Calculate Salary based on mock base salary
+                const baseSalary = emp.salary || (emp.rank === 'Head Guard' ? 18000 : 15000);
+                const dailyRate = baseSalary / workingDaysInMonth;
+                const gross = presentDays * dailyRate;
+                const deductions = gross * 0.125; // 12.5% PF/ESI
+                const net = gross - deductions;
+
                 return `
                     <tr>
                         <td><strong>${emp.name}</strong><br><small>${emp.id}</small></td>
                         <td>${presentDays}</td>
-                        <td>${26 - presentDays}</td>
+                        <td>${absents}</td>
                         <td>0</td>
                         <td>₹ ${gross.toFixed(2)}</td>
                         <td style="font-weight: 700;">₹ ${net.toFixed(2)}</td>
