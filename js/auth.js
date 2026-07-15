@@ -38,22 +38,23 @@ const AuthService = (() => {
         localStorage.setItem('nsf_user', JSON.stringify(user));
 
         // Redirection based on role
-        switch(role) {
-            case 'guard':
-                window.location.href = 'guard/dashboard.html';
-                break;
-            case 'supervisor':
-                window.location.href = 'supervisor/dashboard.html';
-                break;
-            case 'admin':
-                window.location.href = 'admin/dashboard.html';
-                break;
-            case 'client':
-                window.location.href = 'client/dashboard.html';
-                break;
-            default:
-                window.location.href = 'index.html';
-        }
+        setTimeout(() => {
+            switch(role) {
+                case 'guard':
+                    window.location.href = 'guard/dashboard.html';
+                    break;
+                case 'supervisor':
+                    window.location.href = 'supervisor/dashboard.html';
+                    break;
+                case 'admin':
+                    window.location.href = 'admin/dashboard.html';
+                    break;
+                case 'client':
+                    window.location.href = 'client/dashboard.html';
+                    break;
+                default:
+                    window.location.href = 'index.html';
+            }
         }, 500); // 500ms mock delay
     };
 
