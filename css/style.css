@@ -1066,7 +1066,7 @@ nav a:hover { color: var(--secondary); opacity: 1; }
 }
 
 /* Global Responsive Guards */
-html, body { overflow-x: hidden !important; width: 100%; max-width: 100vw;
+html, body {
     max-width: 100vw;
     overflow-x: hidden;
 }
@@ -1084,7 +1084,7 @@ img {
 }
 
 /* GLOBAL RESPONSIVE RULES */
-html, body { overflow-x: hidden !important; width: 100%; max-width: 100vw;
+html, body {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
@@ -1308,4 +1308,131 @@ img {
 }
 .hero-bg {
     max-width: 100vw;
+}
+
+/* ----------------------------------------------------------
+   CAREERS SECTION
+---------------------------------------------------------- */
+.careers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.career-card {
+    background: #FFF;
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-premium);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.career-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-premium);
+    border-color: var(--secondary);
+}
+
+.career-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.career-card p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .careers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Additional Mobile Responsive Fixes */
+@media (max-width: 768px) {
+    .experience-card {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-top: 20px;
+        width: 100%;
+        margin-left: 0;
+    }
+    .about-images {
+        flex-direction: column;
+    }
+    .img-large img {
+        height: auto;
+    }
+    .img-small-wrap {
+        width: 100%;
+        flex-direction: row;
+        margin-top: 20px;
+    }
+    .img-small img {
+        height: 120px;
+    }
+    .hero-features {
+        flex-wrap: wrap;
+    }
+}
+
+/* Additional Typography and Spacing Fixes */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 32px; }
+    h2 { font-size: 28px; }
+    .footer-main-grid { gap: 30px; }
+    .section { padding: 60px 0; }
+}
+
+/* Improved Button Hover Styles */
+.btn-gold {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-gold:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+}
+
+.btn-outline {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-outline:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+}
+
+.btn-quote {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-quote:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+}
+
+@media (max-width: 768px) {
+    .hero-container {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .hero-btns {
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+    .hero-btns .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .hero-features {
+        justify-content: center;
+    }
 }
