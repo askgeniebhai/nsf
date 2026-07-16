@@ -900,3 +900,5 @@ nav a:hover { color: var(--secondary); opacity: 1; }
         justify-content: center;
     }
 }
+
+html, body { overflow-x: hidden !important; width: 100%; max-width: 100vw; }
