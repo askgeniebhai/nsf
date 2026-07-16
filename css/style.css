@@ -1,8 +1,6 @@
-/* ==========================================================
    HAMIX FLAGSHIP DESIGN SYSTEM - PREMIUM ENTERPRISE V2
    Architecture: Executive Corporate / Fortune 500
    Colors: Midnight Navy (#0B1F3A), Premium Gold (#D4AF37)
-========================================================== */
 
 :root {
     --primary:          #0B1F3A; /* Midnight Navy */
@@ -1083,4 +1081,231 @@ img {
     .container {
         padding: 0 20px;
     }
+}
+
+/* GLOBAL RESPONSIVE RULES */
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-size: 18px; /* Desktop Body Text */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* SECTION SPACING */
+.section { padding: 80px 0; }
+
+@media (max-width: 1024px) {
+    .section { padding: 48px 0; }
+    .container { padding: 0 40px; }
+}
+
+@media (max-width: 768px) {
+    body { font-size: 16px; } /* Mobile Body Text */
+    .section { padding: 24px 0; }
+    .container { padding: 0 20px; }
+}
+
+/* HERO TITLE TYPOGRAPHY */
+.hero h1 { font-size: 56px; }
+
+@media (max-width: 1024px) {
+    .hero h1 { font-size: 44px; }
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 32px; }
+}
+
+/* REMOVE HARDCODED PX WIDTHS OR NEGATIVE MARGINS CAUSING OVERFLOW */
+.experience-card {
+    right: 0; /* Reset desktop negative margin causing overflow */
+}
+
+@media (min-width: 1201px) {
+    .experience-card {
+        right: -40px; /* Only allow negative margin on very large screens */
+    }
+}
+
+/* GRID RESPONSIVENESS */
+/* Statistics Grid */
+.hero-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+@media (max-width: 1024px) { .hero-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .hero-stats-grid { grid-template-columns: 1fr; } }
+
+/* Services Grid */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+@media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
+
+/* Industries Grid */
+.industries-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+@media (max-width: 1024px) { .industries-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .industries-grid { grid-template-columns: 1fr; } }
+
+/* About Section */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+@media (max-width: 1024px) { .about-grid { grid-template-columns: 1fr; } }
+.about-images { display: flex; flex-direction: row; gap: 25px; }
+@media (max-width: 768px) { .about-images { flex-direction: column; } }
+
+/* Mission & Vision */
+.mission-vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+@media (max-width: 768px) { .mission-vision-grid { grid-template-columns: 1fr; } }
+.mv-card { border-radius: var(--radius-lg); height: 100%; display: flex; flex-direction: column; }
+
+/* Careers Grid */
+.careers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+@media (max-width: 1024px) { .careers-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .careers-grid { grid-template-columns: 1fr; } }
+
+/* Why Layout */
+.why-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+@media (max-width: 1024px) { .why-layout { grid-template-columns: 1fr; } }
+
+/* Footer Main Grid */
+.footer-main-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+@media (max-width: 1024px) { .footer-main-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .footer-main-grid { grid-template-columns: 1fr; gap: 30px; } }
+
+/* MOBILE NAVIGATION REFACTOR */
+@media (max-width: 992px) {
+    header nav, .nav-cta {
+        display: none !important; /* Hide old inline flex behavior */
+    }
+
+    header.menu-open nav, header.menu-open .nav-cta {
+        display: flex !important;
+    }
+
+    header nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background: var(--primary);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        padding: 80px 30px 30px;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    header.menu-open nav {
+        right: 0;
+    }
+
+    header nav ul {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 20px !important;
+        width: 100%;
+        margin-bottom: 30px;
+        border-top: none !important;
+    }
+
+    header nav a {
+        font-size: 16px !important;
+        width: 100%;
+        display: block;
+        padding: 10px 0 !important;
+    }
+
+    .nav-cta {
+        position: fixed;
+        bottom: 30px;
+        right: -100%;
+        width: 240px;
+        z-index: 1001;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    header.menu-open .nav-cta {
+        right: 30px;
+    }
+
+    /* Modal Overlay Background */
+    .menu-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+        z-index: 999;
+    }
+
+    header.menu-open .menu-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* ACCESSIBILITY & BUTTON HEIGHTS */
+.btn {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 30px; /* Reset padding to balance min-height */
+}
+
+.btn-quote {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    /* Touch friendly links */
+    nav a {
+        padding: 15px 0 !important;
+    }
+}
+
+/* Additional Hotfixes for 390px Viewport Overflows */
+@media (max-width: 768px) {
+    .why-features-grid { grid-template-columns: 1fr; gap: 30px; }
+    .why-feat-item { flex-direction: column; text-align: center; align-items: center; }
+}
+
+@media (max-width: 480px) {
+    .experience-card { width: 100%; max-width: none; padding: 20px; }
+}
+
+/* Fix ticker causing overflow width calculations */
+.ticker-section {
+    width: 100%;
+    overflow: hidden !important;
+    position: relative;
+    max-width: 100vw;
+}
+.ticker-track {
+    width: max-content;
+}
+
+/* Fix images forcing overflow */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Fix for hero-bg scale animation causing sub-pixel overflow bounds */
+.hero {
+    overflow: hidden !important;
+}
+.hero-bg {
+    max-width: 100vw;
 }
