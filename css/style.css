@@ -2,6 +2,7 @@
    HAMIX FLAGSHIP DESIGN SYSTEM - PREMIUM ENTERPRISE V2
    Architecture: Executive Corporate / Fortune 500
    Colors: Midnight Navy (#0B1F3A), Premium Gold (#D4AF37)
+
 */
 
 :root {
@@ -852,7 +853,7 @@ nav a:hover { color: var(--secondary); opacity: 1; }
     .hero h1 { font-size: 32px; }
     h2 { font-size: 28px; }
     .footer-main-grid { gap: 30px; }
-    .section { padding: 120px 0; }
+    .section { padding: 60px 0; }
 }
 
 /* Improved Button Hover Styles */
@@ -925,48 +926,6 @@ nav a:hover { color: var(--secondary); opacity: 1; }
         flex-wrap: wrap;
     }
 
-    header nav, .nav-cta {
-        display: none;
-        width: 100%;
-    }
-
-    header.menu-open nav, header.menu-open .nav-cta {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        animation: slideDown 0.3s ease;
-    }
-
-    header.menu-open nav ul {
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-        padding: 20px 0;
-        border-top: 1px solid rgba(255,255,255,0.1);
-
-    }
-
-    header.menu-open nav a {
-        display: block;
-        width: 100%;
-        padding: 10px 0;
-        white-space: nowrap;
-    }
-
-    header.menu-open .nav-cta {
-        padding-bottom: 20px;
-    }
-
-    header.menu-open .btn-quote {
-        width: 100%;
-        text-align: center;
-        justify-content: center;
-    }
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 
@@ -986,11 +945,11 @@ nav a:hover { color: var(--secondary); opacity: 1; }
 
 /* Hero Section Responsive Layout */
 @media (max-width: 992px) {
-    .hero {  padding: 60px 0; }
+    .hero { min-height: auto; padding: 100px 0; }
     .hero h1 { font-size: 48px; }
     .hero-container { grid-template-columns: 1fr; gap: 40px; }
     .hero-features { justify-content: flex-start; flex-wrap: wrap; }
-    .hero-stats-box {  }
+    .hero-stats-box { margin-top: 20px; }
 }
 
 @media (max-width: 768px) {
@@ -1040,7 +999,7 @@ nav a:hover { color: var(--secondary); opacity: 1; }
     .about-images { flex-direction: column; align-items: center; }
     .img-large { width: 100%; }
     .img-large img { height: auto; max-height: 350px; }
-    .img-small-wrap { flex-direction: row; width: 100%; justify-content: space-between;  gap: 15px; }
+    .img-small-wrap { flex-direction: row; width: 100%; justify-content: space-between; margin-top: 15px; gap: 15px; }
     .img-small-wrap .img-small { width: 48%; }
 }
 
@@ -1104,7 +1063,7 @@ img {
 }
 
 /* SECTION SPACING */
-.section { padding: 120px 0; }
+.section { padding: 80px 0; }
 
 @media (max-width: 1024px) {
     .section { padding: 48px 0; }

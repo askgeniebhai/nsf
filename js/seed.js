@@ -39,6 +39,6 @@
         localStorage.setItem('nsf_v1_seeded', 'true');
         console.log("Mock data seeded successfully.");
         console.log("Identity Module Mock data seeded successfully.");
-    }
+
     }
 })();
