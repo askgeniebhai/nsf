@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee ID Card | NSF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { background: #e2e8f0; font-family: 'Poppins', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; flex-direction: column; gap: 20px; }
+
+        .id-card-wrapper {
+            width: 2.125in;
+            height: 3.375in; /* CR80 standard ID card size */
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #cbd5e1;
+            background-image: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        .card-header {
+            background: #0B1F3A;
+            color: white;
+            text-align: center;
+            padding: 15px 10px 10px;
+            position: relative;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 0; width: 100%; height: 10px;
+            background: #D4AF37;
+        }
+
+        .logo-text { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; margin-bottom: 2px; }
+        .logo-sub { font-size: 6px; color: #D4AF37; text-transform: uppercase; letter-spacing: 1px; }
+
+        .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 10px 10px;
+            text-align: center;
+        }
+
+        .photo-container {
+            width: 70px;
+            height: 70px;
+            border-radius: 5px;
+            border: 2px solid #D4AF37;
+            padding: 2px;
+            margin-bottom: 10px;
+            background: white;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+
+        .emp-name { font-size: 13px; font-weight: 800; color: #0B1F3A; margin: 0; text-transform: uppercase; }
+        .emp-desig { font-size: 8px; font-weight: 600; color: #64748b; text-transform: uppercase; margin: 2px 0 10px; }
+
+        .details-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 35px 1fr;
+            gap: 2px;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .d-label { font-size: 7px; color: #64748b; font-weight: 600; }
+        .d-value { font-size: 7px; color: #0B1F3A; font-weight: 700; }
+
+        .qr-code {
+            width: 40px;
+            height: 40px;
+            margin-top: auto;
+            border: 1px solid #e2e8f0;
+            padding: 2px;
+            background: white;
+        }
+
+        .card-footer {
+            background: #f1f5f9;
+            padding: 8px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        .card-footer p { margin: 0; font-size: 6px; color: #64748b; font-weight: 600; }
+
+        .print-btn {
+            padding: 10px 20px;
+            background: #0B1F3A;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .print-btn:hover { background: #D4AF37; color: #0B1F3A; }
+
+        @media print {
+            body { background: white; align-items: flex-start; justify-content: flex-start; }
+            .print-btn { display: none; }
+            .id-card-wrapper { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="id-card-wrapper" id="id-card">
+        <div class="card-header">
+            <div class="logo-text">Neela Security<br>Force</div>
+            <div class="logo-sub">Operations Control</div>
+        </div>
+        <div class="card-body">
+            <div class="photo-container">
+                <img id="c-photo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e2e8f0'><path d='M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z'/></svg>" alt="Photo">
+            </div>
+            <h2 class="emp-name" id="c-name">Loading...</h2>
+            <p class="emp-desig" id="c-desig">--</p>
+
+            <div class="details-grid">
+                <div class="d-label">EMP ID:</div><div class="d-value" id="c-id">--</div>
+                <div class="d-label">BLOOD:</div><div class="d-value" id="c-blood">--</div>
+                <div class="d-label">DOB:</div><div class="d-value" id="c-dob">--</div>
+                <div class="d-label">EMGCY:</div><div class="d-value" id="c-emg">--</div>
+            </div>
+
+            <!-- Mock QR Code Image -->
+            <img class="qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" alt="QR">
+        </div>
+        <div class="card-footer">
+            <p>Valid from: <span id="c-valid"></span></p>
+            <p style="margin-top:2px; font-size:5px;">If found, please return to Neela Security Force</p>
+        </div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">Print ID Card</button>
+
+    <script src="../js/StorageService.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const empId = urlParams.get('id');
+
+        if (empId) {
+            const employees = JSON.parse(localStorage.getItem('nsf_employees') || '[]');
+            const emp = employees.find(e => e.id === empId);
+
+            if (emp) {
+                document.getElementById('c-name').textContent = emp.name;
+                document.getElementById('c-desig').textContent = emp.designation;
+                document.getElementById('c-id').textContent = emp.id;
+                document.getElementById('c-blood').textContent = emp.bloodGroup || 'N/A';
+                document.getElementById('c-dob').textContent = emp.dob || 'N/A';
+                document.getElementById('c-emg').textContent = emp.emergencyContact || 'N/A';
+
+                const today = new Date();
+                document.getElementById('c-valid').textContent = `01/${(today.getMonth()+1).toString().padStart(2,'0')}/${today.getFullYear()}`;
+
+                if (emp.photo) {
+                    document.getElementById('c-photo').src = emp.photo;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
