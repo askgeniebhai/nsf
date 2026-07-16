@@ -9,16 +9,31 @@ const AuthService = (() => {
 
         // Mock authentication validation
         let valid = false;
+        let authName = 'Authorized User';
+
         if (role === 'admin' && username === 'admin' && password === 'admin') {
             valid = true;
-        } else if (role === 'guard' && username === 'NFS-9921' && password === 'password') {
-            valid = true;
-        } else if (role === 'supervisor' || role === 'client') {
-            // For phase 1, assume other roles are valid if they provide anything
-            // but we can be stricter.
-            if (password === 'password' || password === 'admin') {
-               valid = true;
+            authName = 'System Administrator';
+        } else if (role === 'guard' && password === 'password') {
+            // Check against loaded mock data
+            let mockData = localStorage.getItem('nsf_employees');
+            if (mockData) {
+                const employees = JSON.parse(mockData);
+                const found = employees.find(e => e.id === username);
+                if (found) {
+                    valid = true;
+                    authName = found.name;
+                }
+            } else if (username === 'NFS-9921') {
+                valid = true; // Fallback for tests
+                authName = 'John Smith';
             }
+        } else if (role === 'supervisor' && password === 'password') {
+            valid = true;
+            authName = 'Supervisor';
+        } else if (role === 'client' && password === 'password') {
+            valid = true;
+            authName = 'Client Rep';
         }
 
         if (!valid) {
@@ -31,7 +46,7 @@ const AuthService = (() => {
         const user = {
             id: username,
             role: role,
-            name: username === 'NFS-9921' ? 'John Smith' : 'Authorized User',
+            name: authName,
             loggedInAt: new Date().toISOString()
         };
 
