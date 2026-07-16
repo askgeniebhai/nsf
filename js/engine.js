@@ -506,3 +506,25 @@ const PortalEngine = (() => {
 window.addEventListener("DOMContentLoaded", () => {
     PortalEngine.init();
 });
+
+// Mobile Navigation Toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('header nav');
+    const navCta = document.querySelector('.nav-cta');
+    const header = document.querySelector('header');
+
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            header.classList.toggle('menu-open');
+        });
+
+        // Close menu on link click
+        const navLinks = document.querySelectorAll('header nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                header.classList.remove('menu-open');
+            });
+        });
+    }
+});

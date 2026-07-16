@@ -6,19 +6,36 @@ const UI = (() => {
         const container = document.querySelector('.sidebar');
         if (!container) return;
 
-        const menuItems = [
-            { id: 'dashboard', icon: 'layout-dashboard', label: 'Dashboard', link: 'dashboard.html' },
-            { id: 'live', icon: 'navigation', label: 'Live Tracking', link: 'live.html' },
-            { id: 'attendance', icon: 'calendar', label: 'Attendance Log', link: 'attendance.html' },
-            { id: 'payroll', icon: 'banknote', label: 'Payroll', link: 'payroll.html' },
-            { id: 'reports', icon: 'file-text', label: 'Reports', link: 'reports.html' },
-            { id: 'settings', icon: 'settings', label: 'System Settings', link: 'settings.html' }
-        ];
+        let menuItems = [];
+        let consoleLabel = 'Control Panel';
+
+        if (user.role === 'admin') {
+            consoleLabel = 'Admin Console';
+            menuItems = [
+                { id: 'dashboard', icon: 'layout-dashboard', label: 'Dashboard', link: 'dashboard.html' },
+                { id: 'live', icon: 'navigation', label: 'Live Tracking', link: 'live.html' },
+                { id: 'attendance', icon: 'calendar', label: 'Attendance Log', link: 'attendance.html' },
+                { id: 'identity', icon: 'id-card', label: 'Identity Management', link: 'identity.html' },
+                { id: 'payroll', icon: 'banknote', label: 'Payroll', link: 'payroll.html' },
+                { id: 'reports', icon: 'file-text', label: 'Reports', link: 'reports.html' },
+                { id: 'settings', icon: 'settings', label: 'System Settings', link: 'settings.html' }
+            ];
+        } else if (user.role === 'guard') {
+            consoleLabel = 'Guard Portal';
+            menuItems = [
+                { id: 'dashboard', icon: 'layout-dashboard', label: 'Dashboard', link: 'dashboard.html' },
+                { id: 'attendance', icon: 'clock', label: 'Mark Attendance', link: 'attendance.html' },
+                { id: 'patrol', icon: 'map', label: 'Patrol Tours', link: 'patrol.html' },
+                { id: 'incidents', icon: 'alert-triangle', label: 'Report Incident', link: 'incidents.html' },
+                { id: 'history', icon: 'history', label: 'My History', link: 'history.html' },
+                { id: 'profile', icon: 'user', label: 'My Identity Profile', link: 'profile.html' }
+            ];
+        }
 
         container.innerHTML = `
             <div class="sidebar-header">
                 <img src="../assets/images/logo.png" alt="Logo">
-                <p style="font-size: 10px; color: #D4AF37; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Admin Console</p>
+                <p style="font-size: 10px; color: #D4AF37; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">${consoleLabel}</p>
             </div>
             <div class="sidebar-menu">
                 ${menuItems.map(item => `
