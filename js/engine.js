@@ -240,10 +240,7 @@ function renderClients(clients) {
         allClients.findIndex(item => item.logo === client.logo) === index
     );
 
-    const tickerItems = uniqueClients.map(c => `<img src="${c.logo}" alt="${c.name}">`).join("");
-    const tickerClones = uniqueClients.map(c => `<img src="${c.logo}" alt="" aria-hidden="true" data-ticker-clone="true">`).join("");
-
-    container.innerHTML = tickerItems + tickerClones + tickerClones;
+    container.innerHTML = uniqueClients.map(c => `<img src="${c.logo}" alt="${c.name}">`).join("");
 }
 
 /* ---------- SCROLL EFFECTS ---------- */
