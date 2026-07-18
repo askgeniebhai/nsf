@@ -79,7 +79,10 @@ function initializeWebsite() {
     setHTML("heroTitle", customer.heroTitle);
     setText("heroSubtitle", customer.heroSubtitle);
     if (customer.heroImage) {
-        document.documentElement.style.setProperty('--hero-bg', `url('${customer.heroImage}')`);
+        const heroBg = document.querySelector('.hero-bg');
+        if (heroBg) {
+            heroBg.style.backgroundImage = `linear-gradient(rgba(11, 31, 58, 0.62), rgba(11, 31, 58, 0.82)), url('${customer.heroImage}')`;
+        }
     }
 
     // About

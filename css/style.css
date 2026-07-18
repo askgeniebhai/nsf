@@ -176,35 +176,6 @@ nav a:hover { color: var(--secondary); opacity: 1; }
 .hero-stat-item h3 { font-size: 32px; color: #FFF; margin-bottom: 5px; }
 .hero-stat-item p { font-size: 11px; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 1px; margin: 0; }
 
-.scroll-down {
-    position: absolute;
-    bottom: 40px; left: 50%; transform: translateX(-50%);
-    z-index: 10;
-}
-
-.mouse {
-    width: 24px; height: 40px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 20px;
-    position: relative;
-}
-
-.mouse::after {
-    content: '';
-    width: 4px; height: 8px;
-    background: var(--secondary);
-    position: absolute;
-    top: 8px; left: 50%; transform: translateX(-50%);
-    border-radius: 2px;
-    animation: mouseScroll 1.5s infinite;
-}
-
-@keyframes mouseScroll {
-    0% { transform: translate(-50%, 0); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translate(-50%, 15px); opacity: 0; }
-}
-
 /* ----------------------------------------------------------
    TICKER SECTION
 ---------------------------------------------------------- */
@@ -224,7 +195,7 @@ nav a:hover { color: var(--secondary); opacity: 1; }
     to { transform: translateX(-50%); }
 }
 
-.ticker-track img { height: 35px; opacity: 0.5; filter: grayscale(1); transition: var(--transition-fast); }
+.ticker-track img { width: 120px; height: 48px; object-fit: cover; border-radius: var(--radius-sm); opacity: 0.65; filter: grayscale(1); transition: var(--transition-fast); }
 .ticker-track img:hover { opacity: 1; filter: grayscale(0); }
 
 /* ----------------------------------------------------------
@@ -2387,4 +2358,15 @@ img {
 }
 .hero-bg {
     max-width: 100vw;
+}
+
+/* Final landing ticker thumbnail sizing after duplicate-logo cleanup */
+.ticker-track img {
+    width: 120px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+@media (max-width: 768px) {
+    .ticker-track img { width: 96px; height: 40px; }
 }
