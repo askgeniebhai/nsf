@@ -35,6 +35,23 @@
 
         .badge-live { display: inline-flex; align-items: center; gap: 5px; color: #ef4444; font-weight: 700; font-size: 11px; text-transform: uppercase; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        @media (max-width: 1024px) {
+            body { display: block; height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: auto; }
+            .sidebar { width: 100%; }
+            .sidebar-menu { display: flex; overflow-x: auto; padding: 10px; }
+            .menu-link { flex: 0 0 auto; padding: 10px 14px; }
+            .main-content { min-width: 0; }
+            .top-nav { height: auto; min-height: 64px; padding: 16px 20px; gap: 12px; }
+            .content-body { padding: 24px 16px; }
+            .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+            .table-card { overflow-x: auto; }
+            .p-table { min-width: 720px; }
+        }
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .stat-card { padding: 20px; }
+            .table-header { align-items: flex-start; flex-direction: column; gap: 10px; }
+        }
     </style>
 </head>
 <body>
