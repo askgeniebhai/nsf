@@ -128,11 +128,11 @@
         }
     ],
     "clients": [
-        { "name": "Global Bank", "logo": "assets/images/logo.png" },
-        { "name": "Tech Corp", "logo": "assets/images/logo.png" },
-        { "name": "Pharma Ltd", "logo": "assets/images/logo.png" },
-        { "name": "City Mall", "logo": "assets/images/logo.png" },
-        { "name": "Elite Residencies", "logo": "assets/images/logo.png" },
-        { "name": "Mega Logistics", "logo": "assets/images/logo.png" }
+        { "name": "Global Bank", "logo": "assets/images/office.jpg" },
+        { "name": "Tech Corp", "logo": "assets/images/campus.jpg" },
+        { "name": "Pharma Ltd", "logo": "assets/images/plaza.jpg" },
+        { "name": "City Mall", "logo": "assets/images/mall.jpg" },
+        { "name": "Elite Residencies", "logo": "assets/images/tower.jpg" },
+        { "name": "Mega Logistics", "logo": "assets/images/control.jpg" }
     ]
 }

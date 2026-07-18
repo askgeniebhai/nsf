@@ -79,7 +79,10 @@ function initializeWebsite() {
     setHTML("heroTitle", customer.heroTitle);
     setText("heroSubtitle", customer.heroSubtitle);
     if (customer.heroImage) {
-        document.documentElement.style.setProperty('--hero-bg', `url('${customer.heroImage}')`);
+        const heroBg = document.querySelector('.hero-bg');
+        if (heroBg) {
+            heroBg.style.backgroundImage = `linear-gradient(rgba(11, 31, 58, 0.62), rgba(11, 31, 58, 0.82)), url('${customer.heroImage}')`;
+        }
     }
 
     // About
@@ -232,9 +235,15 @@ function renderLeadership(leadership) {
 function renderClients(clients) {
     const container = document.getElementById("clientsTrack");
     if (!container) return;
-    const items = clients.map(c => `<img src="${c.logo}" alt="${c.name}">`).join("");
-    // Triple items for smoother seamless loop
-    container.innerHTML = items + items + items;
+
+    const uniqueClients = clients.filter((client, index, allClients) =>
+        allClients.findIndex(item => item.logo === client.logo) === index
+    );
+
+    const tickerItems = uniqueClients.map(c => `<img src="${c.logo}" alt="${c.name}">`).join("");
+    const tickerClones = uniqueClients.map(c => `<img src="${c.logo}" alt="" aria-hidden="true" data-ticker-clone="true">`).join("");
+
+    container.innerHTML = tickerItems + tickerClones + tickerClones;
 }
 
 /* ---------- SCROLL EFFECTS ---------- */
