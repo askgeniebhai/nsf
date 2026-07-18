@@ -232,9 +232,12 @@ function renderLeadership(leadership) {
 function renderClients(clients) {
     const container = document.getElementById("clientsTrack");
     if (!container) return;
-    const items = clients.map(c => `<img src="${c.logo}" alt="${c.name}">`).join("");
-    // Triple items for smoother seamless loop
-    container.innerHTML = items + items + items;
+
+    const uniqueClients = clients.filter((client, index, allClients) =>
+        allClients.findIndex(item => item.logo === client.logo) === index
+    );
+
+    container.innerHTML = uniqueClients.map(c => `<img src="${c.logo}" alt="${c.name}">`).join("");
 }
 
 /* ---------- SCROLL EFFECTS ---------- */

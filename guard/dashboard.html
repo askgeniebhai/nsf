@@ -27,6 +27,14 @@
         .nav-link { text-align: center; color: #64748b; text-decoration: none; font-size: 11px; }
         .nav-link.active { color: #0B1F3A; }
         .nav-link i { width: 20px; height: 20px; display: block; margin: 0 auto 4px; }
+        @media (max-width: 390px) {
+            .g-header { padding: 16px; }
+            .g-container { padding: 16px; }
+            .profile-section { align-items: flex-start; gap: 14px; }
+            .g-menu { grid-template-columns: 1fr; }
+            .bottom-nav { overflow-x: auto; justify-content: flex-start; gap: 22px; padding: 12px 16px; }
+            .nav-link { flex: 0 0 auto; }
+        }
     </style>
 </head>
 <body>
