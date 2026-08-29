@@ -22,6 +22,10 @@
 
     <script src="js/seed.js"></script>
     <script defer src="js/engine.js"></script>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#0B1F3A">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-180.png">
+    <script src="/js/pwa.js" defer></script>
 </head>
 
 <body>
@@ -62,9 +66,11 @@
                     <li><a href="#careers">Careers</a></li>
                     <li><a href="#contact">Contact Us</a></li>
                     <li><a href="login.html" class="btn btn-attendance-nav"><i data-lucide="shield-check"></i> Portal Login</a></li>
+                    <li><button type="button" id="installGuardAppMobile" class="btn btn-attendance-nav" style="display:none; width:100%; border:none; cursor:pointer;"><i data-lucide="download"></i> Install Guard App</button></li>
                 </ul>
             </nav>
             <div class="nav-cta">
+                <button type="button" id="installGuardApp" class="btn-quote" style="display:none; border:none; cursor:pointer;">Install Guard App</button>
                 <a href="login.html" class="btn-quote">Admin Login</a>
             </div>
             <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -486,5 +492,57 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btns = [
+                document.getElementById('installGuardApp'),
+                document.getElementById('installGuardAppMobile')
+            ].filter(Boolean);
+            if (!btns.length || !window.NSFInstall) return;
+
+            function render() {
+                if (NSFInstall.isInstalled()) {
+                    btns.forEach(b => { b.style.display = 'none'; });
+                    return;
+                }
+                if (NSFInstall.isAvailable()) {
+                    btns.forEach(b => {
+                        b.style.display = '';
+                        b.onclick = handleInstallClick;
+                    });
+                    return;
+                }
+                if (NSFInstall.isIOS()) {
+                    btns.forEach(b => {
+                        b.style.display = '';
+                        b.onclick = showIOSInstructions;
+                    });
+                    return;
+                }
+                // Not installable in this browser/context (e.g. desktop Firefox,
+                // or Chrome hasn't fired the install-availability event yet) --
+                // hide rather than show a button that would do nothing.
+                btns.forEach(b => { b.style.display = 'none'; });
+            }
+
+            async function handleInstallClick(e) {
+                e.preventDefault();
+                await NSFInstall.prompt();
+                render();
+            }
+
+            function showIOSInstructions(e) {
+                e.preventDefault();
+                alert('To install: tap the Share icon in Safari, then "Add to Home Screen".');
+            }
+
+            document.addEventListener('nsf:install-available', render);
+            document.addEventListener('nsf:install-completed', render);
+            render();
+            // Chrome fires the install-availability event asynchronously after
+            // load; re-check shortly after in case it fired before this ran.
+            setTimeout(render, 1500);
+        });
+    </script>
 </body>
 </html>

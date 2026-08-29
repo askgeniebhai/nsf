@@ -27,6 +27,10 @@
             .login-card { padding: 28px 20px; }
         }
     </style>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#0B1F3A">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-180.png">
+    <script src="/js/pwa.js" defer></script>
 </head>
 <body>
 
@@ -66,5 +70,26 @@
 
 <script src="js/seed.js"></script>
 <script src="js/auth.js"></script>
+<script>
+    // If a valid, unexpired session already exists (e.g. a guard reopening
+    // the installed app), skip straight to their dashboard instead of
+    // showing the login form again. Reuses the existing session model --
+    // no new auth logic, just the same 24h expiry AuthService already
+    // enforces on protected pages.
+    (function () {
+        const user = AuthService.getCurrentUser();
+        if (!user) return;
+        const diffHours = (new Date() - new Date(user.loggedInAt)) / (1000 * 60 * 60);
+        if (diffHours > 24) return;
+        const destinations = {
+            admin: 'admin/dashboard.html',
+            guard: 'guard/dashboard.html',
+            supervisor: 'supervisor/dashboard.html',
+            client: 'client/dashboard.html'
+        };
+        const dest = destinations[user.role];
+        if (dest) window.location.href = dest;
+    })();
+</script>
 </body>
 </html>
