@@ -8,28 +8,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { background: #f8fafc; font-family: 'Poppins', sans-serif; margin: 0; }
-        .c-header { background: #0B1F3A; color: white; padding: 25px 40px; display: flex; justify-content: space-between; align-items: center; }
-        .c-container { padding: 40px; max-width: 1000px; margin: 0 auto; }
+        body { background: #f8fafc; font-family: 'Poppins', sans-serif; display: flex; height: 100vh; overflow: hidden; margin: 0; }
+        .sidebar { width: 260px; background: #0B1F3A; color: white; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 30px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-header img { height: 40px; margin-bottom: 10px; }
+        .sidebar-menu { flex: 1; padding: 20px 0; }
+        .menu-link { display: flex; align-items: center; gap: 15px; padding: 12px 30px; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; background: none; border: none; width: 100%; text-align: left; font-family: inherit; cursor: pointer; transition: all 0.2s; }
+        .menu-link:hover, .menu-link.active { color: white; background: rgba(212, 175, 55, 0.1); }
+        .menu-link.active { border-left: 4px solid #D4AF37; color: #D4AF37; }
+        .menu-link i { width: 18px; height: 18px; }
+
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .top-nav { height: 70px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; flex-shrink: 0; }
+        .c-container { padding: 40px; max-width: 1000px; }
         .client-welcome { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 30px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
         .table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .table th { text-align: left; font-size: 11px; text-transform: uppercase; color: #64748b; padding: 10px 0; border-bottom: 2px solid #f1f5f9; }
         .table td { padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+
+        @media (max-width: 1024px) {
+            body { display: block; height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: auto; }
+            .sidebar { width: 100%; }
+            .sidebar-menu { display: flex; overflow-x: auto; padding: 10px; }
+            .menu-link { flex: 0 0 auto; width: auto; padding: 10px 14px; }
+            .main-content { min-width: 0; }
+            .top-nav { height: auto; min-height: 64px; padding: 16px 20px; gap: 12px; flex-wrap: wrap; }
+            .c-container { padding: 24px 16px; }
+            .grid { grid-template-columns: 1fr; }
+        }
     </style>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#0B1F3A">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-180.png">
+    <script src="/js/pwa.js" defer></script>
 </head>
 <body>
 
-<div class="c-header">
-    <div style="display: flex; align-items: center; gap: 15px;">
-        <i data-lucide="building-2" style="color: #D4AF37;"></i>
-        <h2 style="font-size: 20px; color: white; margin: 0;">Client Access Portal</h2>
-    </div>
-    <button onclick="AuthService.logout()" style="background: none; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer;">Logout</button>
-</div>
+<div class="sidebar"></div>
 
-<div class="c-container">
+<div class="main-content">
+    <div class="top-nav"></div>
+
+    <div class="c-container">
     <div class="client-welcome">
         <h1 style="margin-top: 0; font-size: 24px;">Welcome, Tech Park Alpha</h1>
         <p style="color: #64748b; font-size: 16px;">Overview of security operations at your site.</p>
@@ -61,13 +83,17 @@
             </ul>
         </div>
     </div>
+    </div>
 </div>
 
 <script src="../js/StorageService.js"></script>
 <script src="../js/seed.js"></script>
 <script src="../js/auth.js"></script>
+<script src="../js/ui-components.js"></script>
 <script>
     AuthService.checkAuth('client');
+    UI.renderSidebar('dashboard');
+    UI.renderTopNav('Client Portal');
     lucide.createIcons();
 </script>
 </body>

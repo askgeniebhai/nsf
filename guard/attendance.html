@@ -8,11 +8,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { background: #f1f5f9; min-height: 100vh; padding-bottom: 80px; }
-        .g-header { background: #0B1F3A; color: white; padding: 20px; display: flex; align-items: center; gap: 15px; }
-        .g-header a { color: white; }
-        .g-header h1 { font-size: 18px; margin: 0; color: white; }
-        .g-container { padding: 20px; max-width: 600px; margin: 0 auto; }
+        body { background: #f8fafc; font-family: 'Poppins', sans-serif; display: flex; height: 100vh; overflow: hidden; margin: 0; }
+        .sidebar { width: 260px; background: #0B1F3A; color: white; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 30px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-header img { height: 40px; margin-bottom: 10px; }
+        .sidebar-menu { flex: 1; padding: 20px 0; }
+        .menu-link { display: flex; align-items: center; gap: 15px; padding: 12px 30px; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; background: none; border: none; width: 100%; text-align: left; font-family: inherit; cursor: pointer; transition: all 0.2s; }
+        .menu-link:hover, .menu-link.active { color: white; background: rgba(212, 175, 55, 0.1); }
+        .menu-link.active { border-left: 4px solid #D4AF37; color: #D4AF37; }
+        .menu-link i { width: 18px; height: 18px; }
+
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .top-nav { height: 70px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; flex-shrink: 0; }
+        .content-body { padding: 20px; }
+        .g-container { max-width: 600px; margin: 0 auto; }
         .att-card { background: white; border-radius: 16px; padding: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; }
         .btn-att { width: 100%; padding: 18px; border-radius: 12px; font-size: 18px; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; transition: all 0.2s; }
         .btn-check-in { background: #10b981; color: white; }
@@ -23,16 +32,31 @@
         .status-off { background: #fef2f2; color: #dc2626; }
         .loc-info { font-size: 12px; color: #64748b; margin-top: 20px; background: #f8fafc; padding: 15px; border-radius: 8px; }
         #live-toggle-wrap { margin-top: 30px; display: flex; align-items: center; justify-content: space-between; padding: 15px; background: white; border-radius: 12px; }
+
+        @media (max-width: 1024px) {
+            body { display: block; height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: auto; }
+            .sidebar { width: 100%; }
+            .sidebar-menu { display: flex; overflow-x: auto; padding: 10px; }
+            .menu-link { flex: 0 0 auto; width: auto; padding: 10px 14px; }
+            .main-content { min-width: 0; }
+            .top-nav { height: auto; min-height: 64px; padding: 16px 20px; gap: 12px; flex-wrap: wrap; }
+            .content-body { padding: 16px; }
+        }
     </style>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#0B1F3A">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-180.png">
+    <script src="/js/pwa.js" defer></script>
 </head>
 <body>
 
-<div class="g-header">
-    <a href="dashboard.html"><i data-lucide="chevron-left"></i></a>
-    <h1>Mark Attendance</h1>
-</div>
+<div class="sidebar"></div>
 
-<div class="g-container">
+<div class="main-content">
+    <div class="top-nav"></div>
+
+    <div class="content-body">
+    <div class="g-container">
     <div class="att-card">
         <div id="duty-status" class="status-badge status-off">OFF DUTY</div>
 
@@ -63,20 +87,19 @@
         </div>
         <input type="checkbox" id="live-location-toggle" style="width: 20px; height: 20px;">
     </div>
-</div>
-
-<div class="bottom-nav">
-    <a href="dashboard.html" class="nav-link"><i data-lucide="layout-dashboard"></i>Dashboard</a>
-    <a href="attendance.html" class="nav-link active"><i data-lucide="map-pin"></i>Attendance</a>
-    <a href="profile.html" class="nav-link"><i data-lucide="user"></i>Profile</a>
+    </div>
+    </div>
 </div>
 
 <script src="../js/StorageService.js"></script>
 <script src="../js/seed.js"></script>
 <script src="../js/auth.js"></script>
+<script src="../js/ui-components.js"></script>
 <script src="../js/attendance.js"></script>
 <script>
     AuthService.checkAuth('guard');
+    UI.renderSidebar('attendance');
+    UI.renderTopNav('Mark Attendance');
     lucide.createIcons();
 </script>
 </body>

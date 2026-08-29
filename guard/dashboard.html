@@ -8,10 +8,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { background: #f1f5f9; min-height: 100vh; padding-bottom: 80px; }
-        .g-header { background: #0B1F3A; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .g-header h1 { font-size: 18px; margin: 0; color: white; }
-        .g-container { padding: 20px; max-width: 600px; margin: 0 auto; }
+        body { background: #f8fafc; font-family: 'Poppins', sans-serif; display: flex; height: 100vh; overflow: hidden; margin: 0; }
+        .sidebar { width: 260px; background: #0B1F3A; color: white; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 30px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-header img { height: 40px; margin-bottom: 10px; }
+        .sidebar-menu { flex: 1; padding: 20px 0; }
+        .menu-link { display: flex; align-items: center; gap: 15px; padding: 12px 30px; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; background: none; border: none; width: 100%; text-align: left; font-family: inherit; cursor: pointer; transition: all 0.2s; }
+        .menu-link:hover, .menu-link.active { color: white; background: rgba(212, 175, 55, 0.1); }
+        .menu-link.active { border-left: 4px solid #D4AF37; color: #D4AF37; }
+        .menu-link i { width: 18px; height: 18px; }
+
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .top-nav { height: 70px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; flex-shrink: 0; }
+        .content-body { padding: 20px; }
+        .g-container { max-width: 600px; margin: 0 auto; }
         .g-card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
         .profile-section { display: flex; align-items: center; gap: 20px; }
         .avatar { width: 60px; height: 60px; background: #D4AF37; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0B1F3A; font-weight: 700; font-size: 24px; }
@@ -23,31 +33,36 @@
         .menu-item:active { transform: scale(0.95); }
         .menu-item i { width: 32px; height: 32px; color: #0B1F3A; margin-bottom: 10px; }
         .menu-item span { display: block; font-size: 14px; font-weight: 600; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #e2e8f0; }
-        .nav-link { text-align: center; color: #64748b; text-decoration: none; font-size: 11px; }
-        .nav-link.active { color: #0B1F3A; }
-        .nav-link i { width: 20px; height: 20px; display: block; margin: 0 auto 4px; }
+
+        @media (max-width: 1024px) {
+            body { display: block; height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: auto; }
+            .sidebar { width: 100%; }
+            .sidebar-menu { display: flex; overflow-x: auto; padding: 10px; }
+            .menu-link { flex: 0 0 auto; width: auto; padding: 10px 14px; }
+            .main-content { min-width: 0; }
+            .top-nav { height: auto; min-height: 64px; padding: 16px 20px; gap: 12px; flex-wrap: wrap; }
+            .content-body { padding: 16px; }
+            .g-menu { grid-template-columns: 1fr 1fr; }
+        }
         @media (max-width: 390px) {
-            .g-header { padding: 16px; }
-            .g-container { padding: 16px; }
             .profile-section { align-items: flex-start; gap: 14px; }
             .g-menu { grid-template-columns: 1fr; }
-            .bottom-nav { overflow-x: auto; justify-content: flex-start; gap: 22px; padding: 12px 16px; }
-            .nav-link { flex: 0 0 auto; }
         }
     </style>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#0B1F3A">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-180.png">
+    <script src="/js/pwa.js" defer></script>
 </head>
 <body>
 
-<div class="g-header">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <i data-lucide="shield"></i>
-        <h1>Guard Portal</h1>
-    </div>
-    <button onclick="AuthService.logout()" style="background:none; border:none; color:white; cursor:pointer;"><i data-lucide="log-out"></i></button>
-</div>
+<div class="sidebar"></div>
 
-<div class="g-container">
+<div class="main-content">
+    <div class="top-nav"></div>
+
+    <div class="content-body">
+    <div class="g-container">
     <div class="g-card">
         <div class="profile-section">
             <div class="avatar" id="g-initials">JS</div>
@@ -83,18 +98,18 @@
         <p style="font-size: 14px; margin-bottom: 8px;"><i data-lucide="clock" class="icon-sm"></i> 08:00 AM - 08:00 PM</p>
         <p style="font-size: 14px;"><i data-lucide="map-pin" class="icon-sm"></i> Gate 4, Tech Park Alpha</p>
     </div>
+    </div>
+    </div>
 </div>
 
-<div class="bottom-nav">
-    <a href="dashboard.html" class="nav-link active"><i data-lucide="layout-dashboard"></i>Dashboard</a>
-    <a href="attendance.html" class="nav-link"><i data-lucide="map-pin"></i>Attendance</a>
-    <a href="profile.html" class="nav-link"><i data-lucide="user"></i>Profile</a>
-</div>
-
+<script src="../js/StorageService.js"></script>
 <script src="../js/seed.js"></script>
 <script src="../js/auth.js"></script>
+<script src="../js/ui-components.js"></script>
 <script>
     const user = AuthService.checkAuth('guard');
+    UI.renderSidebar('dashboard');
+    UI.renderTopNav('Guard Dashboard');
     if (user) {
         document.getElementById('g-name').textContent = user.name;
         document.getElementById('g-id').textContent = 'ID: ' + user.id;
