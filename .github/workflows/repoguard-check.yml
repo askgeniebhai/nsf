@@ -1,0 +1,28 @@
+name: RepoGuard check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  repoguard:
+    name: RepoGuard governance + sanity checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run RepoGuard check
+        env:
+          REPOGUARD_BASE_SHA: ${{ github.event.pull_request.base.sha || '' }}
+          REPOGUARD_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: bash scripts/repoguard-check.sh
