@@ -68,9 +68,9 @@
         { "name": "Manufacturing", "image": "assets/images/plant.jpg", "icon": "settings" },
         { "name": "Retail & Malls", "image": "assets/images/mall.jpg", "icon": "shopping-bag" },
         { "name": "Healthcare", "image": "assets/images/plaza.jpg", "icon": "heart-pulse" },
-        { "name": "Hospitality", "image": "assets/images/plaza.jpg", "icon": "hotel" },
+        { "name": "Hospitality", "image": "assets/images/gate.jpg", "icon": "hotel" },
         { "name": "Logistics", "image": "assets/images/control.jpg", "icon": "truck" },
-        { "name": "Educational Institutions", "image": "assets/images/campus.jpg", "icon": "graduation-cap" }
+        { "name": "Educational Institutions", "image": "assets/images/watch.jpg", "icon": "graduation-cap" }
     ],
     "whyChooseUs": [
         {
@@ -124,7 +124,7 @@
         {
             "name": "Amit Shah",
             "role": "Chief Security Strategist",
-            "image": "assets/images/guard.jpg"
+            "image": "assets/images/patrol.jpg"
         }
     ],
     "clients": [
