@@ -30,6 +30,11 @@ const UI = (() => {
                 { id: 'history', icon: 'history', label: 'My History', link: 'history.html' },
                 { id: 'profile', icon: 'user', label: 'My Identity Profile', link: 'profile.html' }
             ];
+        } else if (user.role === 'client') {
+            consoleLabel = 'Client Portal';
+            menuItems = [
+                { id: 'dashboard', icon: 'layout-dashboard', label: 'Dashboard', link: 'dashboard.html' }
+            ];
         }
 
         container.innerHTML = `

@@ -3,11 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incident Report | NSF</title>
+    <title>Patrol Log | NSF</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background: #f8fafc; font-family: 'Poppins', sans-serif; display: flex; height: 100vh; overflow: hidden; margin: 0; }
+        .sidebar { width: 260px; background: #0B1F3A; color: white; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 30px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-header img { height: 40px; margin-bottom: 10px; }
+        .sidebar-menu { flex: 1; padding: 20px 0; }
+        .menu-link { display: flex; align-items: center; gap: 15px; padding: 12px 30px; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; background: none; border: none; width: 100%; text-align: left; font-family: inherit; cursor: pointer; transition: all 0.2s; }
+        .menu-link:hover, .menu-link.active { color: white; background: rgba(212, 175, 55, 0.1); }
+        .menu-link.active { border-left: 4px solid #D4AF37; color: #D4AF37; }
+        .menu-link i { width: 18px; height: 18px; }
+
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .top-nav { height: 70px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; flex-shrink: 0; }
+        .content-body { padding: 20px; }
+
+        @media (max-width: 1024px) {
+            body { display: block; height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: auto; }
+            .sidebar { width: 100%; }
+            .sidebar-menu { display: flex; overflow-x: auto; padding: 10px; }
+            .menu-link { flex: 0 0 auto; width: auto; padding: 10px 14px; }
+            .main-content { min-width: 0; }
+            .top-nav { height: auto; min-height: 64px; padding: 16px 20px; gap: 12px; flex-wrap: wrap; }
+            .content-body { padding: 16px; }
+        }
+    </style>
 </head>
-<body style="background:#f1f5f9; font-family:sans-serif; padding:20px;">
+<body>
+
+<div class="sidebar"></div>
+
+<div class="main-content">
+    <div class="top-nav"></div>
+
+    <div class="content-body">
     <div style="max-width:500px; margin:0 auto; background:white; padding:30px; border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.05);">
         <h2>Patrol Log</h2>
         <form onsubmit="alert('Log saved'); window.location.href='dashboard.html'; return false;">
@@ -29,11 +61,18 @@
             <a href="dashboard.html" style="display:block; text-align:center; margin-top:15px; color:#64748b; text-decoration:none;">Cancel</a>
         </form>
     </div>
+    </div>
+</div>
 
+<script src="../js/StorageService.js"></script>
 <script src="../js/seed.js"></script>
 <script src="../js/auth.js"></script>
+<script src="../js/ui-components.js"></script>
 <script>
     AuthService.checkAuth('guard');
+    UI.renderSidebar('patrol');
+    UI.renderTopNav('Patrol Log');
+    lucide.createIcons();
 </script>
 </body>
 </html>
