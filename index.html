@@ -66,11 +66,9 @@
                     <li><a href="#careers">Careers</a></li>
                     <li><a href="#contact">Contact Us</a></li>
                     <li><a href="login.html" class="btn btn-attendance-nav"><i data-lucide="shield-check"></i> Portal Login</a></li>
-                    <li><button type="button" id="installGuardAppMobile" class="btn btn-attendance-nav" style="display:none; width:100%; border:none; cursor:pointer;"><i data-lucide="download"></i> Install Guard App</button></li>
                 </ul>
             </nav>
             <div class="nav-cta">
-                <button type="button" id="installGuardApp" class="btn-quote" style="display:none; border:none; cursor:pointer;">Install Guard App</button>
                 <a href="login.html" class="btn-quote">Admin Login</a>
             </div>
             <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -89,6 +87,7 @@
                 <div class="hero-btns reveal reveal-delay-2">
                     <a href="#services" class="btn btn-gold">Our Services <i data-lucide="arrow-right"></i></a>
                     <a id="heroWhatsapp" class="btn btn-outline" target="_blank">Get a Free Consultation</a>
+                    <button type="button" id="installGuardApp" class="btn btn-outline" style="display:none; cursor:pointer;"><i data-lucide="download"></i> Install Guard App</button>
                 </div>
                 <div class="hero-features reveal reveal-delay-3">
                     <span><i data-lucide="shield-check"></i> PSARA Compliant</span>
@@ -190,7 +189,7 @@
                     </div>
                 </div>
                 <div class="why-image reveal">
-                    <img src="assets/images/team.jpg" alt="Security team briefing">
+                    <img src="assets/images/entry.jpg" alt="Security team briefing">
                     <div class="experience-card">
                         <div class="stars">★★★★★</div>
                         <h3>500+</h3>
@@ -495,8 +494,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const btns = [
-                document.getElementById('installGuardApp'),
-                document.getElementById('installGuardAppMobile')
+                document.getElementById('installGuardApp')
             ].filter(Boolean);
             if (!btns.length || !window.NSFInstall) return;
 
