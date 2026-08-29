@@ -37,10 +37,10 @@
 
     <div class="portal-body">
         <div class="guard-info">
-            <div class="guard-avatar">JS</div>
+            <div class="guard-avatar" id="pg-initials">--</div>
             <div>
-                <p style="font-weight: 600; font-size: 16px;">John Smith</p>
-                <p style="font-size: 13px; color: #64748b;">ID: NFS-9921</p>
+                <p style="font-weight: 600; font-size: 16px;" id="pg-name">--</p>
+                <p style="font-size: 13px; color: #64748b;" id="pg-id">ID: --</p>
                 <span class="site-badge" id="assigned-site">Assigned: Tech Park Alpha</span>
             </div>
         </div>
@@ -135,10 +135,11 @@
     }
 
     function saveAttendance(lat, lng, status) {
+        const currentUser = AuthService.getCurrentUser();
         const records = StorageService.load('nfs_attendance', []);
         records.push({
-            guardName: "John Smith",
-            guardId: "NFS-9921",
+            guardName: currentUser ? currentUser.name : 'Unknown Guard',
+            guardId: currentUser ? currentUser.id : 'UNKNOWN',
             siteName: MOCK_SITE.name,
             timestamp: new Date().toISOString(),
             lat: lat,
@@ -160,7 +161,12 @@
 <script src="../js/seed.js"></script>
 <script src="../js/auth.js"></script>
 <script>
-    AuthService.checkAuth('guard');
+    const pgUser = AuthService.checkAuth('guard');
+    if (pgUser) {
+        document.getElementById('pg-name').textContent = pgUser.name;
+        document.getElementById('pg-id').textContent = 'ID: ' + pgUser.id;
+        document.getElementById('pg-initials').textContent = pgUser.name.split(' ').map(n => n[0]).join('');
+    }
 </script>
 </body>
 </html>

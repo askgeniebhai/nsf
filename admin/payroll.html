@@ -75,11 +75,7 @@
 
         function renderPayroll() {
             const logs = StorageService.load('nsf_attendance_logs', []);
-            const allEmployees = StorageService.load('nsf_employees', []);
-            const employees = allEmployees.length > 0 ? allEmployees : [
-                { id: 'NFS-9921', name: 'John Smith', rank: 'Guard', salary: 15000 },
-                { id: 'NFS-001', name: 'Rajesh Kumar', rank: 'Head Guard', salary: 18000 }
-            ];
+            const employees = StorageService.load('nsf_employees', []);
 
             const body = document.getElementById('payroll-body');
             body.innerHTML = employees.map(emp => {

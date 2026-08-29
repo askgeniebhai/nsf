@@ -273,15 +273,8 @@ function initScrollEffects() {
 ========================================================== */
 
 const PortalEngine = (() => {
-    // Initial Employee Data
-    const employees = [
-        { id: 'NFS-001', name: 'Rajesh Kumar', rank: 'Head Guard', shift: 'Day' },
-        { id: 'NFS-002', name: 'Suresh Raina', rank: 'Security Guard', shift: 'Day' },
-        { id: 'NFS-003', name: 'Amit Singh', rank: 'Security Guard', shift: 'Night' },
-        { id: 'NFS-004', name: 'Vikram Rathore', rank: 'Supervisor', shift: 'Day' },
-        { id: 'NFS-005', name: 'Sunil Gavaskar', rank: 'Security Guard', shift: 'Day' },
-        { id: 'NFS-006', name: 'Kushal Tandon', rank: 'Security Guard', shift: 'Night' }
-    ];
+    // Employee Data
+    const employees = JSON.parse(localStorage.getItem('nsf_employees')) || [];
 
     let attendance = JSON.parse(localStorage.getItem('nfs_attendance')) || [];
 

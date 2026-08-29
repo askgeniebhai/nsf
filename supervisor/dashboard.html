@@ -90,13 +90,7 @@
 <script>
     AuthService.checkAuth('supervisor');
 
-    const employees = [
-        { id: 'NFS-001', name: 'Rajesh Kumar', rank: 'Head Guard' },
-        { id: 'NFS-002', name: 'Suresh Raina', rank: 'Security Guard' },
-        { id: 'NFS-003', name: 'Amit Singh', rank: 'Security Guard' },
-        { id: 'NFS-004', name: 'Vikram Rathore', rank: 'Supervisor' },
-        { id: 'NFS-9921', name: 'John Smith', rank: 'Guard' }
-    ];
+    const employees = StorageService.load('nsf_employees', []);
 
     function showTab(id) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
